@@ -10,13 +10,13 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace App\Controller;
+namespace App\Common\Controller;
 
 use App\Kernel\Http\Response;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Psr\Container\ContainerInterface;
 
-abstract class Controller
+abstract class ApiController
 {
     protected Response $response;
 

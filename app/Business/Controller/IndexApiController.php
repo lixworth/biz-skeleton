@@ -10,11 +10,14 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace App\Controller;
+namespace App\Business\Controller;
 
-class IndexController extends Controller
+use App\Common\Controller\ApiController;
+use Swow\Psr7\Message\ResponsePlusInterface;
+
+class IndexApiController extends ApiController
 {
-    public function index()
+    public function index(): ResponsePlusInterface
     {
         $user = $this->request->input('user', 'Hyperf');
         $method = $this->request->getMethod();

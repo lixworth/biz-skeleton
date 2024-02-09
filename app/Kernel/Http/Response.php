@@ -56,7 +56,7 @@ class Response
             ->setStatus($status);
     }
 
-    public function cookie(Cookie $cookie)
+    public function cookie(Cookie $cookie): static
     {
         ResponseContext::set($this->response()->withCookie($cookie));
         return $this;

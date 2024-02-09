@@ -13,11 +13,6 @@
     "license": "MIT",
     "require": {
         "php": ">=8.1",
-        "ext-json": "*",
-        "ext-openssl": "*",
-        "ext-pdo": "*",
-        "ext-pdo_mysql": "*",
-        "ext-redis": "*",
         "ext-swoole": ">=5.0",
         "hyperf/async-queue": "3.1.*",
         "hyperf/cache": "3.1.*",
@@ -50,9 +45,17 @@
         "friendsofphp/php-cs-fixer": "^3.0",
         "hyperf/devtool": "3.1.*",
         "hyperf/testing": "3.1.*",
+        "hyperf/watcher": "^3.1",
         "mockery/mockery": "^1.0",
         "phpstan/phpstan": "^1.0",
         "swoole/ide-helper": "dev-master"
+    },
+    "suggest": {
+        "ext-openssl": "Required to use HTTPS.",
+        "ext-json": "Required to use JSON.",
+        "ext-pdo": "Required to use MySQL Client.",
+        "ext-pdo_mysql": "Required to use MySQL Client.",
+        "ext-redis": "Required to use Redis Client."
     },
     "autoload": {
         "psr-4": {

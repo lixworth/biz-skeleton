@@ -10,9 +10,9 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace App\Exception;
+namespace App\Common\Exception;
 
-use App\Constants\ErrorCodeInterface;
+use App\Common\Constants\ErrorCodeInterface;
 use Hyperf\Server\Exception\ServerException;
 use Throwable;
 

@@ -10,10 +10,10 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace App\Exception\Handler;
+namespace App\Common\Exception\Handler;
 
-use App\Constants\ErrorCode;
-use App\Exception\BusinessException;
+use App\Common\Constants\ErrorCode;
+use App\Common\Exception\BusinessException;
 use App\Kernel\Http\Response;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\Di\Exception\CircularDependencyException;

@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace App\Constants;
+namespace App\Common\Constants;
 
 use Hyperf\Constants\Annotation\Constants;
 use Hyperf\Constants\EnumConstantsTrait;

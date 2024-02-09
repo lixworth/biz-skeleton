@@ -9,12 +9,12 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-use App\Common\Exception\Handler\BusinessExceptionHandler;
 
-return [
-    'handler' => [
-        'http' => [
-            BusinessExceptionHandler::class,
-        ],
-    ],
-];
+namespace App\Common\Constants;
+
+use BackedEnum;
+
+interface ErrorCodeInterface extends BackedEnum
+{
+    public function getMessage(array $translate = null): string;
+}
