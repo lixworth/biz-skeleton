@@ -13,10 +13,14 @@ declare(strict_types=1);
 namespace App\Business\Controller;
 
 use App\Common\Controller\ApiController;
+use Hyperf\HttpServer\Annotation\Controller;
+use Hyperf\HttpServer\Annotation\GetMapping;
 use Swow\Psr7\Message\ResponsePlusInterface;
 
+#[Controller(server: 'http')]
 class IndexApiController extends ApiController
 {
+    #[GetMapping(path: '/')]
     public function index(): ResponsePlusInterface
     {
         $user = $this->request->input('user', 'Hyperf');
@@ -24,7 +28,7 @@ class IndexApiController extends ApiController
         return $this->response->success([
             'user' => $user,
             'method' => $method,
-            'message' => 'Hello Hyperf.',
+            'message' => 'Hello LixWorth.',
         ]);
     }
 }
