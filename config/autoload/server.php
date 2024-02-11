@@ -14,9 +14,13 @@ use Hyperf\Framework\Bootstrap\PipeMessageCallback;
 use Hyperf\Framework\Bootstrap\ServerStartCallback;
 use Hyperf\Framework\Bootstrap\WorkerExitCallback;
 use Hyperf\Framework\Bootstrap\WorkerStartCallback;
+use Hyperf\HttpServer\Server;
 use Hyperf\Server\CoroutineServer;
 use Hyperf\Server\Event;
-use Hyperf\Server\Server;
+use Hyperf\Server\ServerInterface;
+use Swoole\Constant;
+
+use function Hyperf\Support\env;
 
 return [
     'mode' => SWOOLE_BASE,
@@ -24,25 +28,25 @@ return [
     'servers' => [
         [
             'name' => 'http',
-            'type' => Server::SERVER_HTTP,
+            'type' => ServerInterface::SERVER_HTTP,
             'host' => '0.0.0.0',
             'port' => 9501,
             'sock_type' => SocketType::TCP,
             'callbacks' => [
-                Event::ON_REQUEST => [Hyperf\HttpServer\Server::class, 'onRequest'],
+                Event::ON_REQUEST => [Server::class, 'onRequest'],
             ],
         ],
     ],
     'settings' => [
-        'enable_coroutine' => true,
-        'worker_num' => 4,
-        'pid_file' => BASE_PATH . '/runtime/hyperf.pid',
-        'open_tcp_nodelay' => true,
-        'max_coroutine' => 100000,
-        'open_http2_protocol' => true,
-        'max_request' => 0,
-        'socket_buffer_size' => 2 * 1024 * 1024,
-        'package_max_length' => 2 * 1024 * 1024,
+        Constant::OPTION_ENABLE_COROUTINE => true,
+        Constant::OPTION_WORKER_NUM => env('APP_ENV', 'env') != 'dev' ? swoole_cpu_num() * 2 : 4,
+        Constant::OPTION_PID_FILE => BASE_PATH . '/runtime/hyperf.pid',
+        Constant::OPTION_OPEN_TCP_NODELAY => true,
+        Constant::OPTION_MAX_COROUTINE => 100000,
+        Constant::OPTION_OPEN_HTTP2_PROTOCOL => true,
+        Constant::OPTION_MAX_REQUEST => 0,
+        Constant::OPTION_SOCKET_BUFFER_SIZE => 2 * 1024 * 1024,
+        Constant::OPTION_BUFFER_OUTPUT_SIZE => 2 * 1024 * 1024,
     ],
     'callbacks' => [
         Event::ON_BEFORE_START => [ServerStartCallback::class, 'beforeStart'],
