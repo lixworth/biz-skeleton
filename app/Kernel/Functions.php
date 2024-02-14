@@ -12,14 +12,16 @@ declare(strict_types=1);
 use Hyperf\AsyncQueue\Driver\DriverFactory;
 use Hyperf\AsyncQueue\JobInterface;
 use Hyperf\Context\ApplicationContext;
+use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\Formatter\FormatterInterface;
+use Hyperf\Logger\Logger;
+use Hyperf\Redis\RedisFactory;
+use Hyperf\Redis\RedisProxy;
+use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
 
 if (! function_exists('di')) {
-    /**
-     * Finds an entry of the container by its identifier and returns it.
-     * @return mixed|\Psr\Container\ContainerInterface
-     */
-    function di(?string $id = null)
+    function di(?string $id = null): ContainerInterface
     {
         $container = ApplicationContext::getContainer();
         if ($id) {
@@ -31,9 +33,6 @@ if (! function_exists('di')) {
 }
 
 if (! function_exists('format_throwable')) {
-    /**
-     * Format a throwable to string.
-     */
     function format_throwable(Throwable $throwable): string
     {
         return di()->get(FormatterInterface::class)->format($throwable);
@@ -41,12 +40,26 @@ if (! function_exists('format_throwable')) {
 }
 
 if (! function_exists('queue_push')) {
-    /**
-     * Push a job to async queue.
-     */
     function queue_push(JobInterface $job, int $delay = 0, string $key = 'default'): bool
     {
         $driver = di()->get(DriverFactory::class)->get($key);
         return $driver->push($job, $delay);
+    }
+}
+
+if (! function_exists('logger')) {
+    function logger(string $name = 'hyperf', string $group = 'default'): LoggerInterface
+    {
+        if ($group == 'stdout') {
+            return di()->get(StdoutLoggerInterface::class);
+        }
+        return di()->get(Logger::class)->getLogger($name, $group);
+    }
+}
+
+if (! function_exists('redis')) {
+    function redis(string $name = 'default'): RedisProxy
+    {
+        return di()->get(RedisFactory::class)->get($name);
     }
 }

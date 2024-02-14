@@ -84,9 +84,21 @@
         "post-autoload-dump": [
             "rm -rf runtime/container"
         ],
-        "analyse": "phpstan analyse --memory-limit 512M",
+        "analyse": [
+            "Composer\\Config::disableProcessTimeout",
+            "phpstan analyse --memory-limit 300M -l 0 -c phpstan.neon ./app ./config"
+        ],
         "cs-fix": "php-cs-fixer fix $1",
-        "start": "php ./bin/hyperf.php start",
+        "test-cs": "php-cs-fixer fix -v --dry-run --stop-on-violation --using-cache=no $1",
+        "start": [
+            "Composer\\Config::disableProcessTimeout",
+            "php ./bin/hyperf.php start"
+        ],
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "rm -rf ./runtime/",
+            "php ./bin/hyperf.php server:watch"
+        ],
         "test": "co-phpunit --prepend test/bootstrap.php --colors=always",
         "rector": "rector process --clear-cache"
     }
