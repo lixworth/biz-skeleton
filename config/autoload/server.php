@@ -27,7 +27,7 @@ return [
     'type' => CoroutineServer::class,
     'servers' => [
         [
-            'name' => 'http',
+            'name' => 'business',
             'type' => ServerInterface::SERVER_HTTP,
             'host' => '0.0.0.0',
             'port' => 9501,

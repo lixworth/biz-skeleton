@@ -21,7 +21,7 @@ enum ErrorCode: int implements ErrorCodeInterface
     use EnumConstantsTrait;
 
     /**
-     * @Message("Server Error")
+     * @Message("服务器错误")
      */
     case SERVER_ERROR = 500;
 

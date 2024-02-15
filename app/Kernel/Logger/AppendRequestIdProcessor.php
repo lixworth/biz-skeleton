@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace App\Kernel\Log;
+namespace App\Kernel\Logger;
 
 use Hyperf\Context\Context;
 use Hyperf\Coroutine\Coroutine;

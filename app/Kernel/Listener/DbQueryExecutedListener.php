@@ -10,17 +10,15 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace App\Common\Listener;
+namespace App\Kernel\Listener;
 
 use Hyperf\Collection\Arr;
 use Hyperf\Database\Events\QueryExecuted;
-use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\Logger\LoggerFactory;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
-#[Listener]
 class DbQueryExecutedListener implements ListenerInterface
 {
     private LoggerInterface $logger;
@@ -37,9 +35,6 @@ class DbQueryExecutedListener implements ListenerInterface
         ];
     }
 
-    /**
-     * @param QueryExecuted $event
-     */
     public function process(object $event): void
     {
         if ($event instanceof QueryExecuted) {

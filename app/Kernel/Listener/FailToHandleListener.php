@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace App\Common\Listener;
+namespace App\Kernel\Listener;
 
 use Hyperf\Command\Event\FailToHandle;
 use Hyperf\Event\Annotation\Listener;
@@ -26,11 +26,8 @@ class FailToHandleListener implements ListenerInterface
         ];
     }
 
-    /**
-     * @param FailToHandle $event
-     */
     public function process(object $event): void
     {
-        echo (string) $event->getThrowable();
+        echo $event->getThrowable();
     }
 }

@@ -13,7 +13,7 @@ use App\Common\Exception\Handler\BusinessExceptionHandler;
 
 return [
     'handler' => [
-        'http' => [
+        'business' => [
             BusinessExceptionHandler::class,
         ],
     ],

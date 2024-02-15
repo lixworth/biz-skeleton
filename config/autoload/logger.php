@@ -9,7 +9,7 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
-use App\Kernel\Log\AppendRequestIdProcessor;
+use App\Kernel\Logger\AppendRequestIdProcessor;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\StreamHandler;
 use Monolog\Level;
@@ -20,7 +20,7 @@ return [
             'class' => StreamHandler::class,
             'constructor' => [
                 'stream' => BASE_PATH . '/runtime/logs/hyperf.log',
-                'level' => Level::Info,
+                'level' => Level::Debug,
             ],
         ],
         'formatter' => [

@@ -17,7 +17,7 @@ use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Psr\Container\ContainerInterface;
 
-abstract class ApiController
+abstract class AbstractApiController
 {
     #[Inject]
     protected Response $response;

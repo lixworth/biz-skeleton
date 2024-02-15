@@ -51,7 +51,7 @@ class BusinessExceptionHandler extends ExceptionHandler
 
         $this->logger->error(format_throwable($throwable));
 
-        return $this->response->fail(ErrorCode::SERVER_ERROR->value, 'Server Error');
+        return $this->response->fail(ErrorCode::SERVER_ERROR->value, ErrorCode::SERVER_ERROR->getMessage());
     }
 
     public function isValid(Throwable $throwable): bool
