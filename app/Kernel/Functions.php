@@ -14,7 +14,7 @@ use Hyperf\AsyncQueue\JobInterface;
 use Hyperf\Context\ApplicationContext;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\Formatter\FormatterInterface;
-use Hyperf\Logger\Logger;
+use Hyperf\Logger\LoggerFactory;
 use Hyperf\Redis\RedisFactory;
 use Hyperf\Redis\RedisProxy;
 use Psr\Container\ContainerInterface;
@@ -53,7 +53,7 @@ if (! function_exists('logger')) {
         if ($group == 'stdout') {
             return di()->get(StdoutLoggerInterface::class);
         }
-        return di()->get(Logger::class)->getLogger($name, $group);
+        return di()->get(LoggerFactory::class)->getLogger($name, $group);
     }
 }
 
