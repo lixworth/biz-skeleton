@@ -15,19 +15,11 @@ namespace App\Kernel\Listener;
 use Hyperf\Collection\Arr;
 use Hyperf\Database\Events\QueryExecuted;
 use Hyperf\Event\Contract\ListenerInterface;
-use Hyperf\Logger\LoggerFactory;
-use Psr\Container\ContainerInterface;
-use Psr\Log\LoggerInterface;
+
+use function Hyperf\Support\env;
 
 class DbQueryExecutedListener implements ListenerInterface
 {
-    private LoggerInterface $logger;
-
-    public function __construct(ContainerInterface $container)
-    {
-        $this->logger = $container->get(LoggerFactory::class)->get('sql');
-    }
-
     public function listen(): array
     {
         return [
@@ -52,7 +44,11 @@ class DbQueryExecutedListener implements ListenerInterface
                 }
             }
 
-            $this->logger->info(sprintf('[%s:%s] %s', $event->connectionName, $event->time, $sql));
+            logger('sql')->info(sprintf('[%s:%s] %s', $event->connectionName, $event->time, $sql));
+
+            if (env('LOGGER_DEBUG', 'dev') === 'dev') {
+                logger('sql', 'stdout')->info(sprintf('[%s:%s] %s', $event->connectionName, $event->time, $sql));
+            }
         }
     }
 }

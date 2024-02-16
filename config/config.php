@@ -27,7 +27,7 @@ return [
             LogLevel::INFO,
             LogLevel::NOTICE,
             LogLevel::WARNING,
-            env('APP_ENV', 'dev') === 'dev' ? LogLevel::DEBUG : null,
+            env('LOGGER_DEBUG', 'dev') === 'dev' ? LogLevel::DEBUG : null,
         ],
     ],
 ];
