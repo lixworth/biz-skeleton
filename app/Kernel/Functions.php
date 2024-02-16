@@ -53,7 +53,7 @@ if (! function_exists('logger')) {
         if ($group == 'stdout') {
             return di()->get(StdoutLoggerInterface::class);
         }
-        return di()->get(LoggerFactory::class)->getLogger($name, $group);
+        return di()->get(LoggerFactory::class)->get($name, $group);
     }
 }
 
